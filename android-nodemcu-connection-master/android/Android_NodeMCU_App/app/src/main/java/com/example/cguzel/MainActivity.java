@@ -1,6 +1,7 @@
 package com.example.cguzel.nodemcu_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,8 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 /**
  * Created by cguzel on 26.04.2016.
  */
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private int ss = 0, ff = 0;
     public  String led_val = "0";
     public boolean bb = false;
+
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private Handler handler_data = new Handler();
 
@@ -101,8 +106,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void graphButtonClick(View view){
-
+        Intent intent = new Intent(this, GraphActivity.class);
+        EditText editText = (EditText) findViewById(R.id.edt_ip);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
+
     private class HttpRequestTask extends AsyncTask<String, Void, String> {
 
         private String serverAdress;
