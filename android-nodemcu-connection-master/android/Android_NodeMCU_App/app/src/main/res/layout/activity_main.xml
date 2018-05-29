@@ -57,4 +57,11 @@
         android:onClick="buttonClick"
         android:text="Start!" />
 
+    <Button
+        android:id="@+id/graph_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graph"
+        android:onClick="graphButtonClick"/>
+
 </LinearLayout>

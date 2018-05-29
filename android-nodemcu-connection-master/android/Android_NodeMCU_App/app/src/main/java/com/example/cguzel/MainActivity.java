@@ -100,7 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void graphButtonClick(View view){
 
+    }
     private class HttpRequestTask extends AsyncTask<String, Void, String> {
 
         private String serverAdress;
@@ -202,7 +204,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if(bb == true){
+            //Log.d("msg", "POST Execute!!!");
+            if(bb){
                 if(ss == 0){
                     Toast.makeText(MainActivity.this, "Connected!!", Toast.LENGTH_SHORT).show();
                     ss = 1;
@@ -215,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else{
+                //Log.d("msg", "heree!!!");
                 if(ss == 1){
                     Toast.makeText(MainActivity.this, "Connection lost :(", Toast.LENGTH_SHORT).show();
                     handler_data.removeCallbacks(runnable_data);
