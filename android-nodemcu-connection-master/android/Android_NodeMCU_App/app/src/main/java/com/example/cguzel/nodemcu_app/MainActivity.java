@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,11 +26,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
-/**
- * Created by cguzel on 26.04.2016.
- */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public  String led_val = "0";
     public boolean bb = false;
 
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public static final String EXTRA_MESSAGE = "com.example.cguzel.nodemcu_app.MainActivity.MESSAGE";
 
     private Handler handler_data = new Handler();
 
@@ -107,8 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void graphButtonClick(View view){
         Intent intent = new Intent(this, GraphActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edt_ip);
-        String message = editText.getText().toString();
+        String message = ipAddress.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
