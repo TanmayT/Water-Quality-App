@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -19,6 +20,7 @@ public class FragmentGraph extends Fragment {
     private final Handler mHandler = new Handler();
     private Runnable mTimer1;
     private Runnable mTimer2;
+    private Runnable mTimer3;
     private LineGraphSeries<DataPoint> mSeries1;
     private LineGraphSeries<DataPoint> mSeries2;
     private double graph2LastXValue = 5d;
@@ -33,6 +35,8 @@ public class FragmentGraph extends Fragment {
         GraphView graph = (GraphView) rootView.findViewById(R.id.graph);
         mSeries1 = new LineGraphSeries<>(generateData());
         graph.addSeries(mSeries1);
+        GridLabelRenderer glr = graph.getGridLabelRenderer();
+        glr.setPadding(32);
 
         GraphView graph2 = (GraphView) rootView.findViewById(R.id.graph2);
         mSeries2 = new LineGraphSeries<>();
@@ -40,6 +44,8 @@ public class FragmentGraph extends Fragment {
         graph2.getViewport().setXAxisBoundsManual(true);
         graph2.getViewport().setMinX(0);
         graph2.getViewport().setMaxX(40);
+        GridLabelRenderer glr2 = graph2.getGridLabelRenderer();
+        glr2.setPadding(32);
 
         return rootView;
     }
@@ -72,7 +78,18 @@ public class FragmentGraph extends Fragment {
                 mHandler.postDelayed(this, 200);
             }
         };
+
         mHandler.postDelayed(mTimer2, 1000);
+
+        mTimer3 = new Runnable() {
+            @Override
+            public void run(){
+                SmsReceiver reciever = new SmsReceiver();
+                mHandler.postDelayed(this, 200);
+            }
+        };
+
+        mHandler.postDelayed(mTimer3, 1000);
     }
 
     @Override

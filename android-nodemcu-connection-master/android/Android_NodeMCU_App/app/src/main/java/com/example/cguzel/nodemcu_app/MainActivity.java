@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Log.d("Test", "the acivity still runs in the background");
             String temp  = serverResponse;
             String data[] = temp.split("/");
             //Log.d("VROOM", serverResponse);
@@ -163,6 +164,10 @@ public class MainActivity extends AppCompatActivity {
 
             sensorRead.setText("Sensor :" + data[1] + " mm");
             millisRead.setText("Millis :" + data[2]);
+
+            Intent intent = new Intent("my.action.string");
+            intent.putExtra("extra", 12);
+            sendBroadcast(intent);
         }
 
         @Override
