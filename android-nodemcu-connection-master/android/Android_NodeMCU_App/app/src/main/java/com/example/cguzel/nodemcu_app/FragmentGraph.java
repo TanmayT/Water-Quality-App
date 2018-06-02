@@ -2,6 +2,10 @@ package com.example.cguzel.nodemcu_app;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -20,7 +24,6 @@ public class FragmentGraph extends Fragment {
     private final Handler mHandler = new Handler();
     private Runnable mTimer1;
     private Runnable mTimer2;
-    private Runnable mTimer3;
     private LineGraphSeries<DataPoint> mSeries1;
     private LineGraphSeries<DataPoint> mSeries2;
     private double graph2LastXValue = 5d;
@@ -61,6 +64,11 @@ public class FragmentGraph extends Fragment {
     public void onResume() {
         Log.d("XD", "In resume");
         super.onResume();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("my.action");
+        getActivity().registerReceiver(ReceivefromService, filter);
+
         mTimer1 = new Runnable() {
             @Override
             public void run() {
@@ -74,22 +82,14 @@ public class FragmentGraph extends Fragment {
             @Override
             public void run() {
                 graph2LastXValue += 1d;
-                mSeries2.appendData(new DataPoint(graph2LastXValue, getRandom()), true, 40);
+                mSeries2.appendData(new DataPoint(graph2LastXValue,Double.parseDouble(ReceivefromService.getData())), true, 40);
                 mHandler.postDelayed(this, 200);
             }
         };
 
         mHandler.postDelayed(mTimer2, 1000);
 
-        mTimer3 = new Runnable() {
-            @Override
-            public void run(){
-                SmsReceiver reciever = new SmsReceiver();
-                mHandler.postDelayed(this, 200);
-            }
-        };
 
-        mHandler.postDelayed(mTimer3, 1000);
     }
 
     @Override
@@ -97,6 +97,17 @@ public class FragmentGraph extends Fragment {
         mHandler.removeCallbacks(mTimer1);
         mHandler.removeCallbacks(mTimer2);
         super.onPause();
+        try {
+            getActivity().unregisterReceiver(ReceivefromService);
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().contains("Receiver not registered")) {
+                Log.i("TAG","Tried to unregister the reciver when it's not registered");
+            }
+            else
+            {
+                throw e;
+            }
+        }
     }
 
     private DataPoint[] generateData() {
@@ -117,4 +128,23 @@ public class FragmentGraph extends Fragment {
     private double getRandom() {
         return mLastRandom += mRand.nextDouble()*0.5 - 0.25;
     }
+
+    private MyBroadcastReceiver ReceivefromService = new MyBroadcastReceiver();
+    public class MyBroadcastReceiver extends BroadcastReceiver{
+        private String data = "0";
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            //get the data using the keys you entered at the service
+            String action = intent.getAction();
+
+            Log.i("Receiver", "Broadcast received: " + action);
+            data = intent.getStringExtra("data");
+        }
+
+        public String getData(){
+            return data;
+        }
+    };
+
 }

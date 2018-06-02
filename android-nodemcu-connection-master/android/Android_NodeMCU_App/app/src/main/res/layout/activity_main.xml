@@ -64,4 +64,11 @@
         android:text="Graph"
         android:onClick="graphButtonClick"/>
 
+    <Button
+        android:id="@+id/cal_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calibrate"
+        android:onClick="calButtonClick"/>
+
 </LinearLayout>

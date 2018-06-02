@@ -107,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void calButtonClick(View view){
+        Intent intent = new Intent(this, CalActivity.class);
+        String message = ipAddress.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
     private class HttpRequestTask extends AsyncTask<String, Void, String> {
 
         private String serverAdress;
@@ -165,9 +172,8 @@ public class MainActivity extends AppCompatActivity {
             sensorRead.setText("Sensor :" + data[1] + " mm");
             millisRead.setText("Millis :" + data[2]);
 
-            Intent intent = new Intent("my.action.string");
-            intent.putExtra("extra", 12);
-            sendBroadcast(intent);
+            Intent i = new Intent("my.action").putExtra("data", data[1]);
+            context.sendBroadcast(i);;
         }
 
         @Override
