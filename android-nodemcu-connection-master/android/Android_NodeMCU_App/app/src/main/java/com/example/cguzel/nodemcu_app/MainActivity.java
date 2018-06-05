@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private int ss = 0, ff = 0;
     public  String led_val = "0";
     public boolean bb = false;
-    private JalApplication app = ((JalApplication) this.getApplication());
+    private JalApplication app;
     public static final String EXTRA_MESSAGE = "com.example.cguzel.nodemcu_app.MainActivity.MESSAGE";
 
     private Handler handler_data = new Handler();
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        app = ((JalApplication) this.getApplication());
         ipAddress = (EditText) findViewById(R.id.edt_ip);
         ledOn = (Button) findViewById(R.id.btn_ledOn);
         ledOff = (Button) findViewById(R.id.btn_ledOff);
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         millisRead = (EditText) findViewById(R.id.millis);
         start = (Button) findViewById(R.id.fetch);
         led_info = (EditText) findViewById(R.id.led_status);
-
     }
 
     /** When the button clicks this method   executes**/
@@ -101,17 +101,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void graphButtonClick(View view){
-        Intent intent = new Intent(this, GraphActivity.class);
-        String message = ipAddress.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        if(ss == 1){
+            Intent intent = new Intent(this, GraphActivity.class);
+            String message = ipAddress.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void calButtonClick(View view){
-        Intent intent = new Intent(this, CalActivity.class);
-        String message = ipAddress.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        if(ss == 1){
+            Intent intent = new Intent(this, CalActivity.class);
+            String message = ipAddress.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private class HttpRequestTask extends AsyncTask<String, Void, String> {
@@ -173,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
             sensorRead.setText("Sensor :" + String.valueOf(app.getphSensor()));
             millisRead.setText("Millis :" + data[2]);
 
-            Intent i = new Intent("my.action").putExtra("data", data[1]);
-            context.sendBroadcast(i);;
+//            Intent i = new Intent("my.action").putExtra("data", data[1]);
+//            context.sendBroadcast(i);
         }
 
         @Override

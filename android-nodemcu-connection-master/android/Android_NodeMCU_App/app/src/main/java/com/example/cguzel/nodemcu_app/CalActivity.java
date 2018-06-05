@@ -11,11 +11,13 @@ import android.widget.Toast;
 public class CalActivity extends AppCompatActivity {
 
     private EditText phValue;
+    private JalApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cal);
+        app = ((JalApplication) this.getApplication());
 
         phValue = (EditText) findViewById(R.id.pH_val);
         Intent intent = getIntent();
@@ -27,8 +29,8 @@ public class CalActivity extends AppCompatActivity {
         double val;
         try{
             val = Double.parseDouble(phValue.getText().toString());
+            Log.d("Exception", "No exceptions here");
             if(true){
-                JalApplication app = ((JalApplication) this.getApplication());
                 app.setCalibration(val - app.getphSensor_read());
                 Log.d("Check", String.valueOf(app.getCalibration()));
             }
@@ -37,6 +39,7 @@ public class CalActivity extends AppCompatActivity {
             }
         }
         catch(Exception e){
+            Log.d("Exception", e.getClass().getSimpleName());
             Toast.makeText(CalActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
         }
     }
