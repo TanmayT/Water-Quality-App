@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private int ss = 0, ff = 0;
     public  String led_val = "0";
     public boolean bb = false;
-
+    private JalApplication app = ((JalApplication) this.getApplication());
     public static final String EXTRA_MESSAGE = "com.example.cguzel.nodemcu_app.MainActivity.MESSAGE";
 
     private Handler handler_data = new Handler();
@@ -169,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
             else
                 led_info.setText("Led pin is now :" + "On");
 
-            sensorRead.setText("Sensor :" + data[1] + " mm");
+            app.setPhSensor(Double.parseDouble(data[1]));
+            sensorRead.setText("Sensor :" + String.valueOf(app.getphSensor()));
             millisRead.setText("Millis :" + data[2]);
 
             Intent i = new Intent("my.action").putExtra("data", data[1]);
