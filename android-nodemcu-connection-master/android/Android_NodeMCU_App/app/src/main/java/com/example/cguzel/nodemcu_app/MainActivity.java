@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -30,9 +31,10 @@ import java.net.URISyntaxException;
 
 public class MainActivity extends AppCompatActivity {
 
+
     final Context context = this;
     private EditText ipAddress, sensorRead, millisRead, led_info;
-    private Button ledOn, ledOff, start;
+    private Button ledon,ledoff, start;
     private int ss = 0, ff = 0;
     public  String led_val = "0";
     public boolean bb = false;
@@ -65,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
         app = ((JalApplication) this.getApplication());
         ipAddress = (EditText) findViewById(R.id.edt_ip);
-        ledOn = (Button) findViewById(R.id.btn_ledOn);
-        ledOff = (Button) findViewById(R.id.btn_ledOff);
         sensorRead = (EditText) findViewById(R.id.sensor);
         millisRead = (EditText) findViewById(R.id.millis);
+        ledon      =  (Button) findViewById(R.id.btn_ledOn);
+        ledoff     =  (Button) findViewById(R.id.btn_ledOff);
         start = (Button) findViewById(R.id.fetch);
         led_info = (EditText) findViewById(R.id.led_status);
-    }
+            }
 
     /** When the button clicks this method   executes**/
     public void buttonClick(View view) {
@@ -95,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
          }
-        else if(ss == 1 && view == ledOn) led_val = "1";
-        else if(ss == 1 && view == ledOff) led_val = "0";
+
 
     }
 

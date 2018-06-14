@@ -1,74 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/ocean_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
 
     <EditText
         android:id="@+id/edt_ip"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/aqua"
         android:ems="10"
-        android:hint="Ip Address"
-        android:text="192.168.0.185" />
+        android:gravity="center"
+        android:hint="Enter the IP Address"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_ledOn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="160dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="160dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/aqua"
+        android:onClick="buttonClick"
         android:text="Led On"
-        android:onClick="buttonClick" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_ledOff"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ip"
+        android:shadowColor="@color/black"/>
 
     <Button
         android:id="@+id/btn_ledOff"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/red"
+        android:onClick="buttonClick"
         android:text="Led Off"
-        android:onClick="buttonClick"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ip" />
+
 
     <EditText
         android:id="@+id/led_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Led pin is now :" />
+        android:hint="Led pin is now :"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ip"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/millis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Millis :" />
+        android:hint="Millis :"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ip"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/sensor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="208dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Sensor :" />
+        android:hint="Sensor :"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ip"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/fetch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="76dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="224dp"
+        android:background="@color/green"
         android:onClick="buttonClick"
-        android:text="Start!" />
+        android:text="Start!"
+        app:layout_constraintEnd_toStartOf="@+id/graph_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ledOn" />
 
     <Button
         android:id="@+id/graph_btn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:onClick="graphButtonClick"
         android:text="Graph"
-        android:onClick="graphButtonClick"/>
+        app:layout_constraintEnd_toStartOf="@+id/cal_btn"
+        app:layout_constraintTop_toTopOf="@+id/cal_btn" />
 
     <Button
         android:id="@+id/cal_btn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="224dp"
+        android:onClick="calButtonClick"
         android:text="Calibrate"
-        android:onClick="calButtonClick"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ledOff" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="168dp"
+        android:layout_marginRight="168dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graph_btn"
+        app:srcCompat="@drawable/ic_graph" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/cal_btn"
+        app:srcCompat="@drawable/tools" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ledOn"
+        app:srcCompat="@drawable/ic_led_light_lamp" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ledOff"
+        app:srcCompat="@drawable/ic_led_light_lamp2" />
+
+</android.support.constraint.ConstraintLayout>
