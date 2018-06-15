@@ -4,7 +4,10 @@
     android:color="#cf1858f9"
     tools:targetApi="lollipop">
     <item android:id="@android:id/mask">
-        <shape android:shape="rectangle">
+        <shape android:shape="rectangle"
+            android:innerRadius="4dp"
+            >
+
             <solid android:color="#f8bdfaea" />
         </shape>
     </item>

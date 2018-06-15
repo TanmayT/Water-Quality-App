@@ -2,6 +2,8 @@ package com.example.cguzel.nodemcu_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -34,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     final Context context = this;
     private EditText ipAddress, sensorRead, millisRead, led_info;
-    private ScrollView ScView;
-    private Button ledon,ledoff, start;
+    private VideoView vidviewmain;
+    private Button  start;
     private int ss = 0, ff = 0;
     public  String led_val = "0";
     public boolean bb = false;
@@ -66,16 +69,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        int c=0;
         app = ((JalApplication) this.getApplication());
         ipAddress = (EditText) findViewById(R.id.edt_ip);
         sensorRead = (EditText) findViewById(R.id.sensor);
         millisRead = (EditText) findViewById(R.id.millis);
-        ledon      =  (Button) findViewById(R.id.btn_ledOn);
-        ledoff     =  (Button) findViewById(R.id.btn_ledOff);
         start = (Button) findViewById(R.id.fetch);
         led_info = (EditText) findViewById(R.id.led_status);
-        ScView = (ScrollView) findViewById(R.id.scrollview);
-       // ScViewGraph = (ScrollView) findViewById(R.id.scrollviewgraph);
+
+        while (c==0) {
+            vidviewmain = (VideoView) findViewById(R.id.videoviewmain);
+            // ScViewGraph = (ScrollView) findViewById(R.id.scrollviewgraph);
+            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.indrovid);
+            vidviewmain.setVideoURI(uri);
+            vidviewmain.start();
+
+
+            vidviewmain.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.setLooping(true);
+                }
+            });
+            c++;
+        }
             }
 
     /** When the button clicks this method   executes**/
@@ -106,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void graphButtonClick(View view){
         if(ss == 1){
+            vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, GraphActivity.class);
             String message = ipAddress.getText().toString();
             intent.putExtra(EXTRA_MESSAGE, message);
@@ -119,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void calButtonClick(View view){
         if(ss == 1){
+            vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, CalActivity.class);
             String message = ipAddress.getText().toString();
             intent.putExtra(EXTRA_MESSAGE, message);
