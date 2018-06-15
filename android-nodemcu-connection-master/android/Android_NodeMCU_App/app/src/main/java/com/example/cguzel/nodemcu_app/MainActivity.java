@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     final Context context = this;
     private EditText ipAddress, sensorRead, millisRead, led_info;
+    private ScrollView ScView;
     private Button ledon,ledoff, start;
     private int ss = 0, ff = 0;
     public  String led_val = "0";
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         ledoff     =  (Button) findViewById(R.id.btn_ledOff);
         start = (Button) findViewById(R.id.fetch);
         led_info = (EditText) findViewById(R.id.led_status);
+        ScView = (ScrollView) findViewById(R.id.scrollview);
+       // ScViewGraph = (ScrollView) findViewById(R.id.scrollviewgraph);
             }
 
     /** When the button clicks this method   executes**/
@@ -164,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 serverResponse = e.getMessage();
             } catch (IllegalArgumentException e){
-                e.printStackTrace();;
+                e.printStackTrace();
                 serverResponse = e.getMessage();
             }
 
