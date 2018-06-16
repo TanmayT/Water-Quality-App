@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int c=0;
+
         app = ((JalApplication) this.getApplication());
         ipAddress = (EditText) findViewById(R.id.edt_ip);
         sensorRead = (EditText) findViewById(R.id.sensor);
@@ -77,11 +77,12 @@ public class MainActivity extends AppCompatActivity {
         start = (Button) findViewById(R.id.fetch);
         led_info = (EditText) findViewById(R.id.led_status);
 
-        while (c==0) {
+
             vidviewmain = (VideoView) findViewById(R.id.videoviewmain);
             // ScViewGraph = (ScrollView) findViewById(R.id.scrollviewgraph);
-            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.indrovid);
-            vidviewmain.setVideoURI(uri);
+            Uri uri;
+        uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.introvidnew);
+        vidviewmain.setVideoURI(uri);
             vidviewmain.start();
 
 
@@ -91,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     mediaPlayer.setLooping(true);
                 }
             });
-            c++;
-        }
+
+
             }
 
     /** When the button clicks this method   executes**/
@@ -147,6 +148,21 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
         }
 
+    }
+    public void twopcalButtonCLick(View view)
+    {
+        if(ss==1)
+        {
+            vidviewmain.setVisibility(View.GONE);
+            Intent intent = new Intent(this, twopcalactivity.class);
+            String message = ipAddress.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private class HttpRequestTask extends AsyncTask<String, Void, String> {
