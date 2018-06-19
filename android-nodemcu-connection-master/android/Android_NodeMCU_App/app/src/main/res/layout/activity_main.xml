@@ -35,8 +35,8 @@
         android:backgroundTint="@color/aqua"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter the IP Address"
-        android:textColorHint="@color/black"
+        android:text="10.42.0.1"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

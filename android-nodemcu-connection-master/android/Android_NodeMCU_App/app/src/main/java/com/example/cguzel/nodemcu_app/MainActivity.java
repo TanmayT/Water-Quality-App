@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
     final Context context = this;
     private EditText ipAddress, sensorRead, millisRead, led_info;
     private VideoView vidviewmain;
-    private Button  start;
+    private Button start;
     private int ss = 0, ff = 0;
-    public  String led_val = "0";
+    public String led_val = "0";
     public boolean bb = false;
     private JalApplication app;
     public static final String EXTRA_MESSAGE = "com.example.cguzel.nodemcu_app.MainActivity.MESSAGE";
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             Check connection = new Check(serverAdress);
             connection.execute();
 
-            if(bb == true)
+            if (bb == true)
                 handler_data.postDelayed(runnable_data, 500);
         }
     };
@@ -78,89 +78,85 @@ public class MainActivity extends AppCompatActivity {
         led_info = (EditText) findViewById(R.id.led_status);
 
 
-            vidviewmain = (VideoView) findViewById(R.id.videoviewmain);
-            // ScViewGraph = (ScrollView) findViewById(R.id.scrollviewgraph);
-            Uri uri;
+        vidviewmain = (VideoView) findViewById(R.id.videoviewmain);
+        // ScViewGraph = (ScrollView) findViewById(R.id.scrollviewgraph);
+        Uri uri;
         uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.introvidnew);
         vidviewmain.setVideoURI(uri);
-            vidviewmain.start();
+        vidviewmain.start();
 
 
-            vidviewmain.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    mediaPlayer.setLooping(true);
-                }
-            });
-
-
+        vidviewmain.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setLooping(true);
             }
+        });
 
-    /** When the button clicks this method   executes**/
+
+    }
+
+    /**
+     * When the button clicks this method   executes
+     **/
     public void buttonClick(View view) {
 
         if (ipAddress.getText().toString().equals(""))
             Toast.makeText(MainActivity.this, "Please enter the ip address...", Toast.LENGTH_SHORT).show();
 
-        else  if(view == start){
+        else if (view == start) {
             Log.d("Listen", ipAddress.getText().toString());
 
             ff = 1;
-            if(ss == 0){
+            if (ss == 0) {
                 Toast.makeText(MainActivity.this, "Checking connection....", Toast.LENGTH_SHORT).show();
                 String serverAdress = ipAddress.getText().toString();
                 Check connection = new Check(serverAdress);
                 connection.execute();
 
-            }
-            else{
+            } else {
                 Toast.makeText(MainActivity.this, "Already Connected!", Toast.LENGTH_SHORT).show();
             }
 
-         }
+        }
 
 
     }
 
-    public void graphButtonClick(View view){
-        if(ss == 1){
+    public void graphButtonClick(View view) {
+        if (ss == 1){
             vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, GraphActivity.class);
             String message = ipAddress.getText().toString();
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
-        }
-        else{
+        } else {
             Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    public void calButtonClick(View view){
-        if(ss == 1){
+    public void calButtonClick(View view) {
+        if (ss == 1) {
             vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, CalActivity.class);
             String message = ipAddress.getText().toString();
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
-        }
-        else{
+        } else {
             Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
         }
-
     }
-    public void twopcalButtonCLick(View view)
-    {
-        if(ss==1)
-        {
+
+
+    public void twopcalButtonCLick(View view) {
+        if (ss == 1) {
             vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, twopcalactivity.class);
             String message = ipAddress.getText().toString();
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
-        }
-        else
-        {
+        } else {
             Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -201,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
                 serverResponse = e.getMessage();
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 serverResponse = e.getMessage();
             }
@@ -212,10 +208,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Log.d("Test", "the acivity still runs in the background");
-            String temp  = serverResponse;
+            String temp = serverResponse;
             String data[] = temp.split("/");
             //Log.d("VROOM", serverResponse);
-            if(data[0].equals("0"))
+            if (data[0].equals("0"))
                 led_info.setText("Led pin is now :" + "Off");
             else
                 led_info.setText("Led pin is now :" + "On");
@@ -234,10 +230,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class Check extends AsyncTask<String, Void, String>{
+    private class Check extends AsyncTask<String, Void, String> {
 
         private String serverAdress;
-        public Check(String serverAdress){
+
+        public Check(String serverAdress) {
             this.serverAdress = serverAdress;
         }
 
@@ -250,20 +247,17 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             Socket s = null;
-            try
-            {
+            try {
                 s = new Socket(serverAdress, 8000);
                 bb = true;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 bb = false;
-            }
-            finally
-            {
-                if(s != null)
-                    try {s.close();}
-                    catch(Exception e){}
+            } finally {
+                if (s != null)
+                    try {
+                        s.close();
+                    } catch (Exception e) {
+                    }
             }
 
             return "dummy";
@@ -272,8 +266,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             //Log.d("msg", "POST Execute!!!");
-            if(bb){
-                if(ss == 0){
+            if (bb) {
+                if (ss == 0) {
                     Toast.makeText(MainActivity.this, "Connected!!", Toast.LENGTH_SHORT).show();
                     ss = 1;
                     foo();
@@ -283,16 +277,14 @@ public class MainActivity extends AppCompatActivity {
                 HttpRequestTask requestTask = new HttpRequestTask(serverAdress);
                 requestTask.execute();
 
-            }
-            else{
+            } else {
                 //Log.d("msg", "heree!!!");
-                if(ss == 1){
+                if (ss == 1) {
                     Toast.makeText(MainActivity.this, "Connection lost :(", Toast.LENGTH_SHORT).show();
                     handler_data.removeCallbacks(runnable_data);
                     ss = 0;
                     ff = 0;
-                }
-                else if(ss == 0 && ff == 1){
+                } else if (ss == 0 && ff == 1) {
                     Toast.makeText(MainActivity.this, "Failed to connect :(", Toast.LENGTH_SHORT).show();
                     ff = 0;
                 }
@@ -302,3 +294,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+

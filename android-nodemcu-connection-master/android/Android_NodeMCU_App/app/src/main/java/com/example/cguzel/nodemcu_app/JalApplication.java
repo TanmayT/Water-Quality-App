@@ -34,6 +34,5 @@ public class JalApplication extends Application{
         if (dummyval != 0) { this.phSensor = dummyval;
         }
 
-
     }
 }
