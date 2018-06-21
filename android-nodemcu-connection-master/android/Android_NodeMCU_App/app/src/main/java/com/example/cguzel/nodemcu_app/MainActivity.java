@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private VideoView vidviewmain;
     private Button start;
     private int ss = 0, ff = 0;
+    public  int oneptkey = 0,twoptkey=0;
     public String led_val = "0";
     public boolean bb = false;
     private JalApplication app;
@@ -137,11 +139,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calButtonClick(View view) {
+
         if (ss == 1) {
+            oneptkey=1;
+            twoptkey=0;
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
+            Log.d("msg", "calbuttonCLick");
             vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, CalActivity.class);
             String message = ipAddress.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
         } else {
             Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
@@ -150,11 +157,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void twopcalButtonCLick(View view) {
+
         if (ss == 1) {
+            oneptkey=0;
+            twoptkey=1;
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
+            Log.d("msg", "twoptButtonClick");
             vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, twopcalactivity.class);
             String message = ipAddress.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
         } else {
             Toast.makeText(MainActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
@@ -291,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
 
 }

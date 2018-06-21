@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class CalActivity extends AppCompatActivity {
 
     private EditText phValue;
@@ -21,7 +23,7 @@ public class CalActivity extends AppCompatActivity {
 
         phValue = (EditText) findViewById(R.id.pH_val);
         Intent intent = getIntent();
-        //String message = intent.getStringExtra(com.example.cguzel.nodemcu_app.MainActivity.EXTRA_MESSAGE);
+//        String message = intent.getStringExtra(com.example.cguzel.nodemcu_app.MainActivity.EXTRA_MESSAGE);
 
     }
 
@@ -31,7 +33,10 @@ public class CalActivity extends AppCompatActivity {
             val = Double.parseDouble(phValue.getText().toString());
             Log.d("Exception", "No exceptions here");
             if(true){
-                app.setCalibration(val - app.getphSensor_read());
+                    double dum = val - app.getphSensor_read();
+                    String str = Double.toString(dum);
+                getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("oneptcalibval", str).commit();
+                    app.setCalibration(dum);
                 Log.d("Check", String.valueOf(app.getCalibration()));
             }
             else{

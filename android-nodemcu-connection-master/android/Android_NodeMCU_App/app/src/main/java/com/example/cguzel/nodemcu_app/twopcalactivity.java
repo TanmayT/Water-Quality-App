@@ -37,10 +37,7 @@ public class twopcalactivity extends AppCompatActivity {
 
             //caliberated value
             result = (((app.getphSensor_read()-val1)*(val4-val3))/(val2-val1))+val3;
-
-
-            app.settwocaliberation(result);
-
-
+            String str = Double.toString(result);
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
     }
 }
