@@ -15,6 +15,7 @@ public class JalApplication extends Application {
         return calibration;
     }
 
+    // phSensor implementation
     public void phSensorCalib(double read) {
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
@@ -37,6 +38,7 @@ public class JalApplication extends Application {
 
     }
 
+    // ElectricalConductivity sensor implementation
     public void ElectricalconductivityCalib(double read) {
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
@@ -59,6 +61,7 @@ public class JalApplication extends Application {
 
     }
 
+    // Dissolved Oxygen sensor implementation
     public void DOCalib(double read) {
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
@@ -81,6 +84,7 @@ public class JalApplication extends Application {
 
     }
 
+    //Temperature sensor implementation
     public void TEMPCalib(double read) {
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
@@ -110,7 +114,7 @@ public class JalApplication extends Application {
 
                 return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("oneptval", "0"));
 
-            } if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("twoptkey", 0) == 1){
+            } if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
 
                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("twoptval", "0"));
 

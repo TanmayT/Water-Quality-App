@@ -3,8 +3,6 @@ package com.example.cguzel.nodemcu_app;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import java.util.Random;
 
 public class GraphActivity extends AppCompatActivity {
 

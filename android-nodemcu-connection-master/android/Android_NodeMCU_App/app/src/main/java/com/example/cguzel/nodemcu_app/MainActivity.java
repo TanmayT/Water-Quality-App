@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             getSharedPreferences("MY_POINTERS", MODE_PRIVATE).edit().putInt("TEMP", TEMP).commit();
             Intent intent = new Intent(MainActivity.this, SensorActivity.class);
             startActivity(intent);
+
         }
 
         public void ElectricalConductivityCLick (View view)

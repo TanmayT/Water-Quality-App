@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.File;
-
 public class CalActivity extends AppCompatActivity {
 
     private EditText phValue;
