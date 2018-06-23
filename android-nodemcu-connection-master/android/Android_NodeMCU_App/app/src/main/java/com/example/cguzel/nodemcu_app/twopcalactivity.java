@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class twopcalactivity extends AppCompatActivity {
 
-    private EditText Lowrefsense,Highrefsense;
+    private EditText Lowrefsense, Highrefsense;
     private JalApplication app;
 
     @Override
@@ -26,18 +26,28 @@ public class twopcalactivity extends AppCompatActivity {
         Intent intent = getIntent();
     }
 
-    public void twobuttonClick (View view)
-    {
-        double val1,val2,val3,val4,result;
+    public void twobuttonClick(View view) {
+        double val1, val2, val3, val4, result;
 
-            val1= app.getphSensor_read();
-            val2= app.getphSensor_read();
-            val3= Double.parseDouble(Lowrefsense.getText().toString());
-            val4= Double.parseDouble(Highrefsense.getText().toString());
+        val1 = app.getphSensor_read();
+        val2 = app.getphSensor_read();
+        val3 = Double.parseDouble(Lowrefsense.getText().toString());
+        val4 = Double.parseDouble(Highrefsense.getText().toString());
 
-            //caliberated value
-            result = (((app.getphSensor_read()-val1)*(val4-val3))/(val2-val1))+val3;
-            String str = Double.toString(result);
+        //caliberated value
+        result = (((app.getphSensor_read() - val1) * (val4 - val3)) / (val2 - val1)) + val3;
+        String str = Double.toString(result);
+
+        if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("Phpointer", 0) == 1) {
+
+
             getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+        }
+
+        if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("ECpointer", 0) == 1) {
+
+            getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+        }
     }
 }
+

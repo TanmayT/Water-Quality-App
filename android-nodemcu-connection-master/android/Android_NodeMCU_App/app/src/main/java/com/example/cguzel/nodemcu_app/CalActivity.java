@@ -23,29 +23,45 @@ public class CalActivity extends AppCompatActivity {
 
         phValue = (EditText) findViewById(R.id.pH_val);
         Intent intent = getIntent();
+
+
 //        String message = intent.getStringExtra(com.example.cguzel.nodemcu_app.MainActivity.EXTRA_MESSAGE);
 
     }
 
     public void buttonClick(View view) {
         double val;
-        try{
+        try {
             val = Double.parseDouble(phValue.getText().toString());
             Log.d("Exception", "No exceptions here");
-            if(true){
-                    double dum = val - app.getphSensor_read();
-                    String str = Double.toString(dum);
+
+            double dum = val - app.getphSensor_read();
+            String str = Double.toString(dum);
+            if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("Phpointer", 0) == 1) {
+
                 getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("oneptcalibval", str).commit();
-                    app.setCalibration(dum);
                 Log.d("Check", String.valueOf(app.getCalibration()));
+
+            } else if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("ECpointer", 0) == 1) {
+
+                getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("oneptcalibval", str).commit();
+                Log.d("Check", String.valueOf(app.getCalibration()));
+
             }
-            else{
+
+            else {
+
                 Toast.makeText(CalActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
             }
+
+
         }
+
         catch(Exception e){
+
             Log.d("Exception", e.getClass().getSimpleName());
             Toast.makeText(CalActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
+
         }
     }
 

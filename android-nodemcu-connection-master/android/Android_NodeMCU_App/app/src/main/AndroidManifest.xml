@@ -7,6 +7,13 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
+    <supports-screens
+        android:largeScreens="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:xlargeScreens="true"
+        />
+
     <application
         android:name=".JalApplication"
         android:allowBackup="true"
@@ -23,7 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GraphActivity"
+        <activity
+            android:name=".GraphActivity"
             android:screenOrientation="portrait">
             android:parentActivityName=".MainActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -31,7 +39,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".CalActivity"
+        <activity
+            android:name=".CalActivity"
             android:screenOrientation="portrait">
             android:parentActivityName=".MainActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -39,10 +48,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".twopcalactivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+        <activity
+            android:name=".twopcalactivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SensorActivity" />
     </application>
 
 </manifest>
