@@ -49,6 +49,20 @@ public class CalActivity extends AppCompatActivity {
 
             }
 
+            else if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1) {
+
+                getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("oneptcalibval", str).commit();
+                Log.d("Check", String.valueOf(app.getCalibration()));
+
+            }
+
+            else if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1) {
+
+                getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("oneptcalibval", str).commit();
+                Log.d("Check", String.valueOf(app.getCalibration()));
+
+            }
+
             else {
 
                 Toast.makeText(CalActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();

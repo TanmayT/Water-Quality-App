@@ -48,6 +48,18 @@ public class twopcalactivity extends AppCompatActivity {
 
             getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
         }
+
+        if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1) {
+
+            getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+        }
+
+        if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1) {
+
+            getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+        }
+
     }
+
 }
 

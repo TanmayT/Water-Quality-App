@@ -162,6 +162,23 @@ public class SensorActivity extends AppCompatActivity {
                 getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
                 getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
             }
+
+
+            if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1) {
+
+
+                getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
+                getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
+
+            }
+
+            if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1) {
+
+
+                getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
+                getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
+
+            }
             Log.d("msg", "calbuttonCLick");
             vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, CalActivity.class);
@@ -192,6 +209,23 @@ public class SensorActivity extends AppCompatActivity {
 
                 getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
                 getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
+            }
+
+
+            if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1) {
+
+
+                getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
+                getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
+
+            }
+
+            if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1) {
+
+
+                getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putInt("oneptkey", oneptkey).commit();
+                getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
+
             }
             Log.d("msg", "twoptButtonClick");
             vidviewmain.setVisibility(View.GONE);
