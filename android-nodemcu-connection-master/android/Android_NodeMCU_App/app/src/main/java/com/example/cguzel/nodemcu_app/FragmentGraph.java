@@ -73,7 +73,7 @@ public class FragmentGraph extends Fragment {
             @Override
             public void run() {
                 graph2LastXValue += 1d;
-                mSeries2.appendData(new DataPoint(graph2LastXValue,app.getphSensor()), true, 40);
+                mSeries2.appendData(new DataPoint(graph2LastXValue,app.getSensorVal()), true, 40);
                 mHandler.postDelayed(this, 200);
                 if (graph2LastXValue == 0)
                 {}

@@ -2,18 +2,19 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ocean_background">
+    android:background="@drawable/waterdrop">
 
     <Button
         android:id="@+id/phsensortrigger"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:onClick="PhSensorCLick"
         android:text="PhSensor"
@@ -21,16 +22,16 @@
         app:layout_constraintBottom_toTopOf="@+id/electricalconductivtytrigger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/electricalconductivtytrigger"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="104dp"
         android:gravity="center"
         android:onClick="ElectricalConductivityCLick"
         android:text="ElectricalConductivity"
@@ -38,16 +39,16 @@
         app:layout_constraintBottom_toTopOf="@+id/dotrigger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <Button
         android:id="@+id/dotrigger"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="296dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="196dp"
         android:gravity="center"
         android:onClick="DissolvedOxygenClick"
         android:text="Dissolved Oxygen"
@@ -55,19 +56,34 @@
         app:layout_constraintBottom_toTopOf="@+id/temperaturetrigger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.351" />
 
     <Button
         android:id="@+id/temperaturetrigger"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="92dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="432dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="296dp"
         android:gravity="center"
         android:onClick="TemperatureClick"
         android:text="Temperature"
         android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Location"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="Location"
+        android:onClick="getLocation"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperaturetrigger" />
+
 </android.support.constraint.ConstraintLayout>

@@ -15,8 +15,10 @@ public class JalApplication extends Application {
         return calibration;
     }
 
-    // phSensor implementation
-    public void phSensorCalib(double read) {
+//    PhSensor implementation
+
+    public void phSensorCalib (double read) {
+
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
         if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
@@ -38,8 +40,10 @@ public class JalApplication extends Application {
 
     }
 
-    // ElectricalConductivity sensor implementation
+//     ElectricalConductivity sensor implementation
+
     public void ElectricalconductivityCalib(double read) {
+
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
         if (getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
@@ -61,8 +65,10 @@ public class JalApplication extends Application {
 
     }
 
-    // Dissolved Oxygen sensor implementation
+//   Dissolved Oxygen sensor implementation
+
     public void DOCalib(double read) {
+
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
         if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
@@ -72,7 +78,6 @@ public class JalApplication extends Application {
             String str = Double.toString(oneptval);
             getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("oneptval", str).commit();
             phSensor_read = read;
-
         }
 
         if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
@@ -84,8 +89,10 @@ public class JalApplication extends Application {
 
     }
 
-    //Temperature sensor implementation
+  //  Temperature sensor implementation
+
     public void TEMPCalib(double read) {
+
         dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
         if (getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
@@ -107,60 +114,89 @@ public class JalApplication extends Application {
 
     }
 
-    public double getphSensor() {
+//  All if conditions bundled up in functions
+    public double PhVal()
+    {
+        if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
+
+            return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("oneptval", "0"));
+
+        } if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
+
+            return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("twoptval", "0"));
+
+    }
+    return 9999;
+    }
+
+    public double ECVal()
+    {
+        if (getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
+
+            return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("oneptval", "0"));
+
+        } if (getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getInt("twoptkey", 0) == 1){
+
+        return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("twoptval", "0"));
+
+    }
+    return 9999;
+    }
+
+    public double DOVal()
+    {
+        if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
+
+            return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("oneptval", "0"));
+
+        } if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("twoptkey", 0) == 1){
+
+        return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("twoptval", "0"));
+
+    }
+    return 9999;
+    }
+
+    public double TEMPVal()
+    {
+
+        if (getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
+
+            return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("oneptval", "0"));
+
+        } if (getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getInt("twoptkey", 0) == 1){
+
+        return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("twoptval", "0"));
+
+    }
+    return 9999;
+    }
+
+// Return the respective sensor value
+
+    public double getSensorVal() {
+
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("Phpointer", 0) == 1) {
 
-            if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
-
-                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("oneptval", "0"));
-
-            } if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
-
-               return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("twoptval", "0"));
-
-            }
+            return PhVal();
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("ECpointer", 0) == 1) {
 
-            if (getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
-
-                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("oneptval", "0"));
-
-            } if (getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getInt("twoptkey", 0) == 1){
-
-                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("twoptval", "0"));
-
-            }
+            return ECVal();
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1) {
 
-            if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
-
-                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("oneptval", "0"));
-
-            } if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("twoptkey", 0) == 1){
-
-                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("twoptval", "0"));
-
-            }
+            return DOVal();
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1) {
 
-            if (getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
-
-                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("oneptval", "0"));
-
-            } if (getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getInt("twoptkey", 0) == 1){
-
-                return Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("twoptval", "0"));
-
-            }
+            return TEMPVal();
         }
 
-        return 13;
+        return 9999;
     }
 
     public double getphSensor_read() {
@@ -171,18 +207,22 @@ public class JalApplication extends Application {
 
 //         Used Shared Preferences for saving and retrieving data
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("Phpointer", 0) == 1) {
+
             phSensorCalib(read);
 
         }
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("ECpointer", 0) == 1) {
+
             ElectricalconductivityCalib(read);
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1) {
+
             DOCalib(read);
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1) {
+
             TEMPCalib(read);
         }
 

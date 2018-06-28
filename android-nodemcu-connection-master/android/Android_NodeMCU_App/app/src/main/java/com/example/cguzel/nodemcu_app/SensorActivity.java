@@ -30,13 +30,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 
-
+//  Common activity for all 4 sensors
 public class SensorActivity extends AppCompatActivity {
 
 
     final Context context = this;
     private EditText ipAddress, sensorRead, millisRead, led_info;
-    private VideoView vidviewmain;
     private Button start;
     private int ss = 0, ff = 0;
     public  int oneptkey = 0,twoptkey=0;
@@ -66,11 +65,9 @@ public class SensorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phsensor);
-
-
-
         app = ((JalApplication) this.getApplication());
         ipAddress = (EditText) findViewById(R.id.edt_ip);
         sensorRead = (EditText) findViewById(R.id.sensor);
@@ -78,28 +75,10 @@ public class SensorActivity extends AppCompatActivity {
         start = (Button) findViewById(R.id.fetch);
         led_info = (EditText) findViewById(R.id.led_status);
 
-
-        vidviewmain = (VideoView) findViewById(R.id.videoviewmain);
-
-        Uri uri;
-        uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.introvidnew);
-        vidviewmain.setVideoURI(uri);
-        vidviewmain.start();
-
-
-        vidviewmain.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setLooping(true);
-
-            }
-        });
-
-
     }
 
     /**
-     * When the button clicks this method executes
+     * When the start button clicks this method executes
      **/
     public void buttonClick(View view) {
 
@@ -112,6 +91,7 @@ public class SensorActivity extends AppCompatActivity {
 
             ff = 1;
             if (ss == 0) {
+
                 Toast.makeText(SensorActivity.this, "Checking connection....", Toast.LENGTH_SHORT).show();
                 String serverAdress = ipAddress.getText().toString();
                 Check connection = new Check(serverAdress);
@@ -130,7 +110,7 @@ public class SensorActivity extends AppCompatActivity {
 
     public void graphButtonClick(View view) {
         if (ss == 1){
-            vidviewmain.setVisibility(View.GONE);
+
             Intent intent = new Intent(this, GraphActivity.class);
             String message = ipAddress.getText().toString();
             intent.putExtra(EXTRA_MESSAGE, message);
@@ -144,7 +124,10 @@ public class SensorActivity extends AppCompatActivity {
 
     public void calButtonClick(View view) {
 
+
         if (ss == 1) {
+
+//          initialization for identifiers as to which calibration activity is running
             oneptkey=1;
             twoptkey=0;
 
@@ -179,12 +162,14 @@ public class SensorActivity extends AppCompatActivity {
                 getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
 
             }
+            
             Log.d("msg", "calbuttonCLick");
-            vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, CalActivity.class);
             String message = ipAddress.getText().toString();
             startActivity(intent);
+            
         } else {
+            
             Toast.makeText(SensorActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -193,6 +178,7 @@ public class SensorActivity extends AppCompatActivity {
     public void twopcalButtonCLick(View view) {
 
         if (ss == 1) {
+            
             oneptkey=0;
             twoptkey=1;
 
@@ -227,12 +213,15 @@ public class SensorActivity extends AppCompatActivity {
                 getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
 
             }
+            
             Log.d("msg", "twoptButtonClick");
-            vidviewmain.setVisibility(View.GONE);
             Intent intent = new Intent(this, twopcalactivity.class);
             String message = ipAddress.getText().toString();
             startActivity(intent);
-        } else {
+        } 
+        
+        else {
+            
             Toast.makeText(SensorActivity.this, "Not Connected Yet!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -293,7 +282,7 @@ public class SensorActivity extends AppCompatActivity {
                 led_info.setText("Led pin is now :" + "On");
 
             app.setValue(Double.parseDouble(data[1]));
-            sensorRead.setText("Sensor :" + String.valueOf(app.getphSensor()));
+            sensorRead.setText("Sensor :" + String.valueOf(app.getSensorVal()));
             millisRead.setText("Millis :" + data[2]);
 
 //            Intent i = new Intent("my.action").putExtra("data", data[1]);

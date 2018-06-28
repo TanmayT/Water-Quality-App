@@ -7,21 +7,33 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int Phpointer,ECpointer,DO,TEMP;
+//  Variables to point which activity is initiated
+
+    private int Phpointer, ECpointer, DO, TEMP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
     }
+        // display location updates
+        public void getLocation(View view){
+
+            Intent intent = new Intent(MainActivity.this,LocationActivity.class);
+            startActivity(intent);
+        }
 
         public void PhSensorCLick(View view)
         {
             Phpointer = 1; ECpointer = 0; DO = 0; TEMP = 0;
+//          Shared Preferences used for storing values
             getSharedPreferences("MY_POINTERS", MODE_PRIVATE).edit().putInt("Phpointer", Phpointer).commit();
             getSharedPreferences("MY_POINTERS", MODE_PRIVATE).edit().putInt("ECpointer", ECpointer).commit();
             getSharedPreferences("MY_POINTERS", MODE_PRIVATE).edit().putInt("DO", DO).commit();
             getSharedPreferences("MY_POINTERS", MODE_PRIVATE).edit().putInt("TEMP", TEMP).commit();
+
             Intent intent = new Intent(MainActivity.this, SensorActivity.class);
             startActivity(intent);
 
@@ -63,5 +75,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
 
 }

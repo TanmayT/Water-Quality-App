@@ -1,9 +1,9 @@
 
 from django.http import HttpResponse
-
+import random
 led = "0";
 millis = "0";
-sensor1_read = "7";
+sensor1_read = str(random.randint(0,3));
 
 def index(request):
     return HttpResponse("<h1> Com  homepage </h1>")
@@ -12,7 +12,7 @@ def push(request):
     print (request)
     global led
     led = request.GET["led"]
-    return HttpResponse(led + "/" + sensor1_read + "/" + millis);
+    return HttpResponse(led + "/" + str(random.randint(0,3)) + "/" + millis);
 
 def data(request):
     print (request)

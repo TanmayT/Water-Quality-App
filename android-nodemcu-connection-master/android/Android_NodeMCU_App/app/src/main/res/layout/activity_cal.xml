@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ocean_background">
+    android:background="@drawable/waterdrop">
 
     <EditText
         android:id="@+id/pH_val"
@@ -30,7 +30,7 @@
         android:layout_alignTop="@+id/pH_val"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:text="Offset Value"
+        android:text="Desired Value"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="18sp"
