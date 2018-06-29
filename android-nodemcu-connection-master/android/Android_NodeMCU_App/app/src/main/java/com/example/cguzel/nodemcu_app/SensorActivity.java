@@ -1,9 +1,6 @@
 package com.example.cguzel.nodemcu_app;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -34,7 +30,7 @@ import java.net.URISyntaxException;
 public class SensorActivity extends AppCompatActivity {
 
 
-    final Context context = this;
+
     private EditText ipAddress, sensorRead, millisRead, led_info;
     private Button start;
     private int ss = 0, ff = 0;
@@ -42,7 +38,7 @@ public class SensorActivity extends AppCompatActivity {
     public String led_val = "0";
     public boolean bb = false;
     private JalApplication app;
-    public static final String EXTRA_MESSAGE = "com.example.cguzel.nodemcu_app.MainActivity.MESSAGE";
+
 
     private Handler handler_data = new Handler();
 
@@ -113,7 +109,7 @@ public class SensorActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, GraphActivity.class);
             String message = ipAddress.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, message);
+
             startActivity(intent);
 
         } else {
@@ -165,7 +161,6 @@ public class SensorActivity extends AppCompatActivity {
             
             Log.d("msg", "calbuttonCLick");
             Intent intent = new Intent(this, CalActivity.class);
-            String message = ipAddress.getText().toString();
             startActivity(intent);
             
         } else {
@@ -213,10 +208,8 @@ public class SensorActivity extends AppCompatActivity {
                 getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putInt("twoptkey", twoptkey).commit();
 
             }
-            
-            Log.d("msg", "twoptButtonClick");
+
             Intent intent = new Intent(this, twopcalactivity.class);
-            String message = ipAddress.getText().toString();
             startActivity(intent);
         } 
         
@@ -275,7 +268,6 @@ public class SensorActivity extends AppCompatActivity {
             Log.d("Test", "the acivity still runs in the background");
             String temp = serverResponse;
             String data[] = temp.split("/");
-            //Log.d("VROOM", serverResponse);
             if (data[0].equals("0"))
                 led_info.setText("Led pin is now :" + "Off");
             else
@@ -285,8 +277,7 @@ public class SensorActivity extends AppCompatActivity {
             sensorRead.setText("Sensor :" + String.valueOf(app.getSensorVal()));
             millisRead.setText("Millis :" + data[2]);
 
-//            Intent i = new Intent("my.action").putExtra("data", data[1]);
-//            context.sendBroadcast(i);
+
         }
 
         @Override

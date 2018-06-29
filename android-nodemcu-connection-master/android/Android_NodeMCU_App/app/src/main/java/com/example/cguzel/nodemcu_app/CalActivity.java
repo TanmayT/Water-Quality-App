@@ -72,7 +72,7 @@ public class CalActivity extends AppCompatActivity {
 
         catch(Exception e){
 
-            Log.d("Exception", e.getClass().getSimpleName());
+
             Toast.makeText(CalActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
 
         }

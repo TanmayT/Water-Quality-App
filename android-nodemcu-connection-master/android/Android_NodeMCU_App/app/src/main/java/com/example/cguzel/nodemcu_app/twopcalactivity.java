@@ -257,11 +257,7 @@ public class twopcalactivity extends AppCompatActivity {
             Log.d("Test", "the acivity still runs in the background");
             String temp = serverResponse;
             String data[] = temp.split("/");
-            //Log.d("VROOM", serverResponse);
             val1 = Double.parseDouble(data[1]);
-
-//            Intent i = new Intent("my.action").putExtra("data", data[1]);
-//            context.sendBroadcast(i);
         }
 
         @Override
