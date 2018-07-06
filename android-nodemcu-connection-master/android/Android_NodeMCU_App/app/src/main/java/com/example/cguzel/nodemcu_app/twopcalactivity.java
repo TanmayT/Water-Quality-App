@@ -270,35 +270,52 @@ public class twopcalactivity extends AppCompatActivity {
 
 //     Two point calibration
     public void twobuttonClick(View view) {
-        double  val3, val4, result;
+        double  val3, val4;
 
 //      val3, val4 are reference values
         val3 = Double.parseDouble(Lowrefsense.getText().toString());
         val4 = Double.parseDouble(Highrefsense.getText().toString());
+        String str1 = Double.toString(val1);
+        String str2 = Double.toString(val2);
+        String str3 = Double.toString(val3);
+        String str4 = Double.toString(val4);
 
-        result = (((app.getphSensor_read() - val1) * (val4 - val3)) / (val2 - val1)) + val3;
-        String str = Double.toString(result);
-
+//      storing calibration settings for each sensor in different shared preference
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("Phpointer", 0) == 1) {
 
 
-            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("val1", str1).commit();
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("val2", str2).commit();
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("val3", str3).commit();
+            getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("val4", str4).commit();
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("ECpointer", 0) == 1) {
 
-            getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+
+            getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("val1", str1).commit();
+            getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("val2", str2).commit();
+            getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("val3", str3).commit();
+            getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("val4", str4).commit();
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1) {
 
-            getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+
+            getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("val1", str1).commit();
+            getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("val2", str2).commit();
+            getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("val3", str3).commit();
+            getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("val4", str4).commit();
 
         }
 
         if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1) {
 
-            getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("twoptcalibval", str).commit();
+
+            getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("val1", str1).commit();
+            getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("val2", str2).commit();
+            getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("val3", str3).commit();
+            getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("val4", str4).commit();
 
         }
 

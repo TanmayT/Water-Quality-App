@@ -7,7 +7,6 @@ public class JalApplication extends Application {
     private double calibration = 0;
     private double phSensor = 7;
     private double phSensor_read = 7;
-    private double dummyval = 0;
     private double oneptval=0 , twoptval =0;
 
 
@@ -19,7 +18,7 @@ public class JalApplication extends Application {
 
     public void phSensorCalib (double read) {
 
-        dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("twoptcalibval", "0"));
+
 
         if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
 
@@ -33,18 +32,43 @@ public class JalApplication extends Application {
 
         if (getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
 
-            twoptval = dummyval;
+            phSensor_read = read;
+            twoptval = twoptcalibrationvalue();
             String str = Double.toString(twoptval);
             getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).edit().putString("twoptval", str).commit();
         }
 
     }
 
+//   function to evaluate two point calibrated value
+    private double twoptcalibrationvalue() {
+        if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("Phpointer", 0) == 1) {
+            double result = (((getphSensor_read() -Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("val1", "0")) ) * (Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("val4", "0")) - Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("val3", "0")))) / (Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("val2", "0")) - Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("val1", "0")))) + Double.parseDouble(getSharedPreferences("MY_PREFERENCE_PhSensor", MODE_PRIVATE).getString("val3", "0"));
+            return result;
+        }
+        if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("ECpointer", 0) == 1)
+        {
+            double result = (((getphSensor_read() -Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("val1", "0")) ) * (Double.parseDouble(getSharedPreferences("MY_ElectricalConductivity", MODE_PRIVATE).getString("val4", "0")) - Double.parseDouble(getSharedPreferences("MY_ElectricalConductivity", MODE_PRIVATE).getString("val3", "0")))) / (Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("val2", "0")) - Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("val1", "0")))) + Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("val3", "0"));
+            return result;
+        }
+        if(getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("DO", 0) == 1)
+        {
+            double result = (((getphSensor_read() -Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("val1", "0")) ) * (Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("val4", "0")) - Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("val3", "0")))) / (Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("val2", "0")) - Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("val1", "0")))) + Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("val3", "0"));
+            return result;
+        }
+        if (getSharedPreferences("MY_POINTERS", MODE_PRIVATE).getInt("TEMP", 0) == 1)
+        {
+            double result = (((getphSensor_read() -Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("val1", "0")) ) * (Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("val4", "0")) - Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("val3", "0")))) / (Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("val2", "0")) - Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("val1", "0")))) + Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("val3", "0"));
+            return result;
+        }
+        return 9999;
+    }
+
 //     ElectricalConductivity sensor implementation
 
     public void ElectricalconductivityCalib(double read) {
 
-        dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getString("twoptcalibval", "0"));
+
 
         if (getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
 
@@ -58,7 +82,8 @@ public class JalApplication extends Application {
 
         if (getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
 
-            twoptval = dummyval;
+            phSensor_read = read;
+            twoptval = twoptcalibrationvalue();
             String str = Double.toString(twoptval);
             getSharedPreferences("MY_PREFERENCE_ElectricalConductivity", MODE_PRIVATE).edit().putString("twoptval", str).commit();
         }
@@ -69,7 +94,7 @@ public class JalApplication extends Application {
 
     public void DOCalib(double read) {
 
-        dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getString("twoptcalibval", "0"));
+
 
         if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
 
@@ -82,7 +107,8 @@ public class JalApplication extends Application {
 
         if (getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
 
-            twoptval = dummyval;
+            phSensor_read = read;
+            twoptval = twoptcalibrationvalue();
             String str = Double.toString(twoptval);
             getSharedPreferences("MY_PREFERENCE_DO", MODE_PRIVATE).edit().putString("twoptval", str).commit();
         }
@@ -93,7 +119,6 @@ public class JalApplication extends Application {
 
     public void TEMPCalib(double read) {
 
-        dummyval = Double.parseDouble(getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getString("twoptcalibval", "0"));
 
         if (getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getInt("oneptkey", 0) == 1) {
 
@@ -107,7 +132,8 @@ public class JalApplication extends Application {
 
         if (getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).getInt("twoptkey", 0) == 1) {
 
-            twoptval = dummyval;
+            phSensor_read = read;
+            twoptval = twoptcalibrationvalue();
             String str = Double.toString(twoptval);
             getSharedPreferences("MY_PREFERENCE_TEMP", MODE_PRIVATE).edit().putString("twoptval", str).commit();
         }

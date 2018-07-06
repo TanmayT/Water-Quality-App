@@ -79,6 +79,7 @@ public class SensorActivity extends AppCompatActivity {
     public void buttonClick(View view) {
 
 
+
         if (ipAddress.getText().toString().equals(""))
             Toast.makeText(SensorActivity.this, "Please enter the ip address...", Toast.LENGTH_SHORT).show();
 
