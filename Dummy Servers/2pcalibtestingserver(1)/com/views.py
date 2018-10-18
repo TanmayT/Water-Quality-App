@@ -12,7 +12,7 @@ def push(request):
     print (request)
     global led
     led = request.GET["led"]
-    return HttpResponse(led + "/" + str(random.randint(0,14)) + "/" + millis);
+    return HttpResponse(led + "/" + str("3") + "/" + millis);
 
 def data(request):
     print (request)
@@ -23,3 +23,5 @@ def data(request):
     print (millis)
     print (sensor1_read)
     return HttpResponse("led="+led)
+
+# represent rawlow runon port 8085
